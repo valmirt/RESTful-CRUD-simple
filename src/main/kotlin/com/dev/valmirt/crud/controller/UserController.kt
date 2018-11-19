@@ -10,7 +10,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-class UserController {
+class UserController: BasicController() {
 
     @Autowired
     lateinit var userService: UserService
@@ -38,7 +38,11 @@ class UserController {
 
     @PutMapping("/users")
     fun updateUser(@Valid @RequestBody user: User): User {
-        return userService.saveUser(user)
+        val tempUser = userService.getUser(user.id)
+
+        userService.saveUser(checkUpdateData(tempUser, user))
+
+        return tempUser
     }
 
     @DeleteMapping("/users/{userId}")
