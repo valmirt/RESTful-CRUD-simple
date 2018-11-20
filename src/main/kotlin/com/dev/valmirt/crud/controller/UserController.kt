@@ -40,9 +40,7 @@ class UserController: BasicController() {
     fun updateUser(@Valid @RequestBody user: User): User {
         val tempUser = userService.getUser(user.id)
 
-        userService.saveUser(checkUpdateData(tempUser, user))
-
-        return tempUser
+        return userService.saveUser(checkUpdateData(tempUser, user))
     }
 
     @DeleteMapping("/users/{userId}")
