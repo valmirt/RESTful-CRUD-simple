@@ -6,6 +6,7 @@ import com.dev.valmirt.crud.system.exception.UserNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
+import java.lang.Exception
 
 @Service
 class UserServiceImpl: UserService {
@@ -25,6 +26,10 @@ class UserServiceImpl: UserService {
     }
 
     override fun saveUser(user: User): User {
+        if (user.id != 0L){
+            val tempUser: User? = userRepository.findByEmail(user.email)
+            if (tempUser != null) throw Exception("This email is already registered")
+        }
         return userRepository.save(user)
     }
 
