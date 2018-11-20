@@ -28,7 +28,7 @@ class UserServiceImpl: UserService {
         return userRepository.save(user)
     }
 
-    override fun deleteUser(id: Long) {
-        return userRepository.deleteById(id)
+    override fun deleteUser(user: User) {
+        return userRepository.delete(user)
     }
 }
