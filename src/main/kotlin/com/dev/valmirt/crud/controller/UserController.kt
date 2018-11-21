@@ -36,7 +36,7 @@ class UserController: BasicController() {
     }
 
     @PutMapping("/users")
-    fun updateUser(@Valid @RequestBody user: User): User {
+    fun updateUser(@RequestBody user: User): User {
         val tempUser = userService.getUser(user.id)
 
         return userService.saveUser(checkUpdateData(tempUser, user))

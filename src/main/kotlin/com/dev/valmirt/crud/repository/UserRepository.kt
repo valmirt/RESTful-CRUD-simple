@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository
 interface UserRepository : JpaRepository<User, Long>{
 
     @Query("SELECT u FROM User u WHERE u.email = ?1")
-    fun findByEmail(email: String): User
+    fun findByEmail(email: String): User?
 
     @Query("SELECT u FROM User u WHERE u.firstName = ?1")
-    fun findByFirstName(firstName: String): List<User>
+    fun findByFirstName(firstName: String): List<User>?
 
     @Query("SELECT u FROM User u WHERE u.lastName = ?1")
-    fun findByLastName(lastName: String): List<User>
+    fun findByLastName(lastName: String): List<User>?
 }
