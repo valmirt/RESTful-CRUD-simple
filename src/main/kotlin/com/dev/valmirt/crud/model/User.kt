@@ -19,4 +19,5 @@ class User (@Id
             @NotBlank
             @Size(min = 3, max = 100)
             @Email
+            @Column(unique = true)
             var email: String = "") : AuditModel()

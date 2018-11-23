@@ -10,5 +10,5 @@ interface UserService {
 
     fun saveUser(user: User): User
 
-    fun deleteUser(user: User)
+    fun deleteUser(id: Long)
 }

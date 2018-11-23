@@ -29,11 +29,29 @@ class UserServiceImpl: UserService {
         if (user.id != 0L){
             val tempUser: User? = userRepository.findByEmail(user.email)
             if (tempUser != null) throw Exception("This email is already registered")
+            return userRepository.save(checkUpdateUser(user))
         }
         return userRepository.save(user)
     }
 
-    override fun deleteUser(user: User) {
+    override fun deleteUser(id: Long) {
+        val user = getUser(id)
         return userRepository.delete(user)
+    }
+
+    private fun checkUpdateUser(user: User) : User {
+        val tempUser = getUser(user.id)
+
+        if (!user.firstName.isEmpty()
+                && tempUser.firstName != user.firstName)
+            tempUser.firstName = user.firstName
+        if (!user.lastName.isEmpty()
+                && tempUser.lastName != user.lastName)
+            tempUser.lastName = user.lastName
+        if (!user.email.isEmpty()
+                && tempUser.email != user.email)
+            tempUser.email = user.email
+
+        return tempUser
     }
 }

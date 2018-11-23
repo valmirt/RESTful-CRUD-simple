@@ -9,7 +9,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api")
-class UserController: BasicController() {
+class UserController {
 
     @Autowired
     lateinit var userService: UserService
@@ -37,16 +37,12 @@ class UserController: BasicController() {
 
     @PutMapping("/users")
     fun updateUser(@RequestBody user: User): User {
-        val tempUser = userService.getUser(user.id)
-
-        return userService.saveUser(checkUpdateData(tempUser, user))
+        return userService.saveUser(user)
     }
 
     @DeleteMapping("/users/{userId}")
     fun deleteUser(@PathVariable userId: Long): String {
-        val tempUser = userService.getUser(userId)
-
-        userService.deleteUser(tempUser)
+        userService.deleteUser(userId)
 
         return "Deleted user id - $userId"
     }
